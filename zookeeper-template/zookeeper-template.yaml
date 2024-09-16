@@ -326,7 +326,7 @@ objects:
 parameters:
 - description: Custom Namespace
   name: NAMESPACE
-  value: "zookeeper-1"
+  value: "default"
 - description: Custom Image Tag
   name: ZK_IMAGE_TAG
   value: "3.9.2-debian-12-r12"
