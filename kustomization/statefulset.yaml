@@ -2,11 +2,14 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: zookeeper
+  namespace: "${NAMESPACE}"
+  annotations:
+      template.alpha.openshift.io/wait-for-ready: "true"
   labels:
-    app.kubernetes.io/instance: zookeeper
-    app.kubernetes.io/name: zookeeper
-    app.kubernetes.io/component: zookeeper
-    role: zookeeper
+      app.kubernetes.io/instance: zookeeper
+      app.kubernetes.io/name: zookeeper
+      app.kubernetes.io/component: zookeeper
+      role: zookeeper
 spec:
   replicas: 1
   revisionHistoryLimit: 10
@@ -42,13 +45,10 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 1
       securityContext:
-#        fsGroup: 1001
         fsGroupChangePolicy: Always
-#        supplementalGroups: []
-#        sysctls: []
       containers:
         - name: zookeeper
-          image: docker.io/bitnami/zookeeper:3.9.2-debian-12-r12
+          image: docker.io/bitnami/zookeeper:${ZK_IMAGE_TAG}
           imagePullPolicy: "IfNotPresent"
           securityContext:
             allowPrivilegeEscalation: false
@@ -58,7 +58,6 @@ spec:
             privileged: false
             readOnlyRootFilesystem: true
             runAsNonRoot: true
-            seLinuxOptions: {}
             seccompProfile:
               type: RuntimeDefault
           command:
