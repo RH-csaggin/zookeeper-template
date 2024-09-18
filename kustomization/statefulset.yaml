@@ -41,9 +41,9 @@ spec:
                     app.kubernetes.io/component: zookeeper
                 topologyKey: kubernetes.io/hostname
               weight: 1
-#      securityContext:
+      securityContext:
 #        fsGroup: 1001
-#        fsGroupChangePolicy: Always
+        fsGroupChangePolicy: Always
 #        supplementalGroups: []
 #        sysctls: []
       containers:
