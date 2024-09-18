@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: zookeeper
-  namespace: "${NAMESPACE}"
   annotations:
       template.alpha.openshift.io/wait-for-ready: "true"
   labels:
